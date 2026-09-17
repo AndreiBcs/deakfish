@@ -12,17 +12,76 @@ const char *square_to_coordinates[64] = {
     "a1","b1","c1","d1","e1","f1","g1","h1"
 };
 
-void print_bitboard(Bitboard bb)
+static Bitboard wPawns;
+static Bitboard wKnights;
+static Bitboard wBishops;
+static Bitboard wRooks;
+static Bitboard wQueens;
+static Bitboard wKing;
+static Bitboard bPawns;
+static Bitboard bKnights;
+static Bitboard bBishops;
+static Bitboard bRooks;
+static Bitboard bQueens;
+static Bitboard bKing;
+static Bitboard wPieces;
+static Bitboard bPieces;
+static Bitboard pieces;
+
+Bitboard *whitePawns = &wPawns;
+Bitboard *whiteKnights = &wKnights;
+Bitboard *whiteBishops = &wBishops;
+Bitboard *whiteRooks = &wRooks;
+Bitboard *whiteQueens = &wQueens;
+Bitboard *whiteKing = &wKing;
+Bitboard *blackPawns = &bPawns;
+Bitboard *blackKnights = &bKnights;
+Bitboard *blackBishops = &bBishops;
+Bitboard *blackRooks = &bRooks;
+Bitboard *blackQueens = &bQueens;
+Bitboard *blackKing = &bKing;
+Bitboard *whitePieces = &wPieces;
+Bitboard *blackPieces = &bPieces;
+Bitboard *allPieces = &pieces;
+
+
+void printBitboard(Bitboard* bb)
 {
-    for (int rank = 0; rank < 8; rank++) {
-        for (int file = 0; file < 8; file++) {
+    for (int rank = 0; rank < 8; rank++) 
+    {
+        for (int file = 0; file < 8; file++) 
+        {
             int square = rank * 8 + file;
-            if (get_bit(bb, square)) {
+
+            if (get_bit(bb, square)) 
+            {
                 printf("1 ");
-            } else {
+            } 
+            else
+            {
                 printf(". ");
             }
         }
         printf("\n");
     }
+    printf("\n");
+}
+
+void initBitboards()
+{
+    *whitePawns = (255ULL << 48);
+    *blackPawns = (255ULL << 8);
+    *whiteKnights = (1ULL << 57) | (1ULL << 62);
+    *blackKnights = (1ULL << 1) | (1ULL << 6);
+    *whiteBishops = (1ULL << 58) | (1ULL << 61);
+    *blackBishops = (1ULL << 2) | (1ULL << 5);
+    *whiteRooks = (1ULL << 56) | (1ULL << 63);
+    *blackRooks = (1ULL << 0) | (1ULL << 7);
+    *whiteQueens = (1ULL << 59);
+    *blackQueens = (1ULL << 3);
+    *whiteKing = (1ULL << 60);
+    *blackKing = (1ULL << 4);
+    *whitePieces = *whitePawns | *whiteKnights | *whiteBishops | *whiteRooks | *whiteQueens | *whiteKing;
+    *blackPieces = *blackPawns | *blackKnights | *blackBishops | *blackRooks | *blackQueens | *blackKing;
+    *allPieces = *whitePieces | *blackPieces;
 }

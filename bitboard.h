@@ -19,11 +19,35 @@ enum
 
 extern const char *square_to_coordinates[64];
 
-#define get_bit(bb, sq) ((bb) & (1ULL << (sq)))
-#define set_bit(bb, sq) ((bb) |= (1ULL << (sq)))
-#define pop_bit(bb, sq) ((bb) &= ~(1ULL << (sq)))
-#define count_bits(bb) (__builtin_popcountll(bb))
+enum
+{
+    White, Black
+};
 
-void print_bitboard(Bitboard bb);
+extern Bitboard* whitePawns;
+extern Bitboard* whiteKnights;
+extern Bitboard* whiteBishops;
+extern Bitboard* whiteRooks;
+extern Bitboard* whiteQueens;
+extern Bitboard* whiteKing;
+
+extern Bitboard* blackPawns;
+extern Bitboard* blackKnights;
+extern Bitboard* blackBishops;
+extern Bitboard* blackRooks;
+extern Bitboard* blackQueens;
+extern Bitboard* blackKing;
+
+extern Bitboard* whitePieces;
+extern Bitboard* blackPieces;
+extern Bitboard* allPieces;
+
+#define get_bit(bb, sq) ((*(bb)) & (1ULL << (sq)))
+#define set_bit(bb, sq) ((*(bb)) |= (1ULL << (sq)))
+#define pop_bit(bb, sq) ((*(bb)) &= ~(1ULL << (sq)))
+#define count_bits(bb) (__builtin_popcountll(*(bb)))
+
+void printBitboard(Bitboard* bb);
+void initBitboards();
 
 #endif
