@@ -21,8 +21,36 @@ extern const char *square_to_coordinates[64];
 
 enum
 {
-    White, Black
+    WHITE, BLACK
 };
+
+enum
+{
+    FILE_A, FILE_B, FILE_C, FILE_D, FILE_E, FILE_F, FILE_G, FILE_H
+};
+
+enum
+{
+    RANK_1, RANK_2, RANK_3, RANK_4, RANK_5, RANK_6, RANK_7, RANK_8
+};
+
+enum
+{
+    PAWN = 1, KNIGHT = 3, BISHOP = 3, ROOK = 5, QUEEN = 9, KING = 1000
+};
+
+enum
+{
+    MOVED, NOT_MOVED
+};
+
+int pawnMoves = 8;
+int pawnAttacks[2] = {7, 9};
+int knightMoves[8] = {6, 10, 15, 17, -6, -10, -15, -17};
+int bishopMoves[4] = {7, 9, -7, -9};
+int rookMoves[4] = {8, -8, 1, -1};
+int queenMoves[8] = {7, 9, -7, -9, 8, -8, 1, -1};
+int kingMoves[8] = {7, 9, -7, -9, 8, -8, 1, -1};
 
 extern Bitboard* whitePawns;
 extern Bitboard* whiteKnights;
@@ -38,6 +66,8 @@ extern Bitboard* blackRooks;
 extern Bitboard* blackQueens;
 extern Bitboard* blackKing;
 
+extern Bitboard* whiteKingAndRooks;
+extern Bitboard* blackKingAndRooks;
 extern Bitboard* whitePieces;
 extern Bitboard* blackPieces;
 extern Bitboard* allPieces;
